@@ -90,7 +90,7 @@ function EditTodoForm({initialData,id}:any) {
   return (
     <div className='flex flex-col gap-4 bg-white'>
       {/* 상단 */}
-      <div className={`flex border-2 rounded-2xl w-full h-[64px] items-center justify-center ${todoDetail?.isCompleted ? "bg-[#ddd6fe]" : "bg-white"}`} >
+      <div className={`flex border-2 rounded-2xl w-full h-[64px] items-center justify-center gap-2 px-4 ${todoDetail?.isCompleted ? "bg-[#ddd6fe]" : "bg-white"}`} >        
         <Image 
           onClick={()=>setTodoDetail({...todoDetail, isCompleted:!todoDetail.isCompleted})} 
           src={todoDetail?.isCompleted ? '/ic/checkbox/checkbox.svg' : '/ic/checkbox/emptybox.svg'} 
@@ -98,7 +98,8 @@ function EditTodoForm({initialData,id}:any) {
           className='cursor-pointer'
         />
         <input 
-          className='pl-2 text-[20px] font-bold underline outline-none bg-transparent' 
+          style={{ fieldSizing: 'content' }} // 글자 길이에 맞춰 너비 자동 조절
+          className='min-w-[50px] max-w-full text-[20px] font-bold underline outline-none bg-transparent text-center'
           value={todoDetail?.name ?? ""} 
           onChange={(e) => {
             if (!todoDetail) return;

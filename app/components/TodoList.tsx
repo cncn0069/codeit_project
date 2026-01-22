@@ -5,8 +5,10 @@ import TodoListItem from './TodoListItem'
 import { TodoListItemProps, TodoListProps } from './Todo.types'
 
 function TodoList({ data }:TodoListProps) {
-  if(!data)
+  if(!data){
     return;
+  }
+    
   // true Todo 다 받아서 완료 한거 안한거 나눈 다음 Item으로 전부 표현
   const todoCompleted = data.filter((i:TodoListItemProps) => i.isCompleted);
   // false

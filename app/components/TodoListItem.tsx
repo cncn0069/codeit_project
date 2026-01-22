@@ -2,18 +2,24 @@ import Image from 'next/image'
 import React from 'react'
 import { TodoListItemProps } from './Todo.types';
 import Link from 'next/link';
-import { updateTodo, uploadTodoImage } from '../action';
+import { getTodoDetail, updateTodo, uploadTodoImage } from '../action';
 
 function TodoListItem({id,name,memo,imageUrl,isCompleted}:TodoListItemProps) {
   const imageSrc = `/ic/checkbox/${isCompleted ? 'checkbox.svg' : 'emptybox.svg'}`;
 
   const handleOnChange = async()=>{
+    const todo = await getTodoDetail(String(id));
+    console.log(todo)
+    if(!todo){
+      return;
+    }
+
     await updateTodo({
-      id: id,
-      name: name,
-      memo: memo,
-      imageUrl: imageUrl,
-      isCompleted: !isCompleted
+      id: todo.id,
+      name: todo.name,
+      memo: todo.memo,
+      imageUrl: todo.imageUrl,
+      isCompleted: !todo.isCompleted
     })
   }
 

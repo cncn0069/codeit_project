@@ -4,7 +4,7 @@ import React from 'react'
 
 function Gnb() {
   return (
-    <div className='w-fit'>
+    <div className='w-fit pl-[10%]'>
         <Link href={'/'}> 
             {/* 모바일 */}
             <div className='block md:hidden'>

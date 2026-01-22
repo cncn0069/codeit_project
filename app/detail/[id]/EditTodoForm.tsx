@@ -1,6 +1,5 @@
 'use client'
 import { deleteTodo, updateTodo, uploadTodoImage } from '@/app/action';
-import { TodoListItemProps, TodoUrlDto } from '@/app/components/Todo.types';
 import MemoCRUDButton from '@/app/components/ui/MemoCRUDButton';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
@@ -81,11 +80,12 @@ function EditTodoForm({initialData,id}:any) {
   return (
     <div className='flex flex-col gap-4'>
       {/* 상단 */}
-      <div className={`flex border-2 rounded-2xl w-full h-[64px] items-center justify-center cursor-pointer ${todoDetail?.isCompleted ? "bg-[#ddd6fe]" : "bg-white"}`} >
+      <div className={`flex border-2 rounded-2xl w-full h-[64px] items-center justify-center ${todoDetail?.isCompleted ? "bg-[#ddd6fe]" : "bg-white"}`} >
         <Image 
           onClick={()=>setTodoDetail({...todoDetail, isCompleted:!todoDetail.isCompleted})} 
           src={todoDetail?.isCompleted ? '/ic/checkbox/checkbox.svg' : '/ic/checkbox/emptybox.svg'} 
           alt='todo' height={32} width={32} 
+          className='cursor-pointer'
         />
         <input 
           className='pl-2 text-[20px] font-bold underline outline-none bg-transparent' 

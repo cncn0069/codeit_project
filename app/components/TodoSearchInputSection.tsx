@@ -4,6 +4,7 @@ import Search from './Search';
 import MemoCRUDButton from './ui/MemoCRUDButton';
 import { TodoListItemProps } from './Todo.types';
 import { useRouter } from 'next/navigation';
+import { postTodos } from '../action';
 
 function TodoSearchInputSection() {
     const router = useRouter();
@@ -15,19 +16,11 @@ function TodoSearchInputSection() {
             console.log("input을 찾을 수 없습니다.");
             return;
         }
-        try {
-            const res = await fetch('/api/todo' ,{
-            method : 'POST',
-            body: JSON.stringify({
-                    "name": inputValue
-                })
-            })
-            // fetchTodos();
-            
-        } catch (error) {
-            console.log(error);
-        }
 
+        await postTodos({
+                    "name": inputValue
+                });
+        //서치칸 비우기
         setInputValue('');
         //버튼 누른후 새로고침
         router.refresh();

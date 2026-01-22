@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { TodoListItemProps, TodoListUpdateDto } from "./components/Todo.types";
+import { CreateDto } from "./components/Dto.types";
 
 const BACKEND_URL = 'https://assignment-todolist-api.vercel.app/api/cncn0069/items/'
 
@@ -13,6 +14,17 @@ export async function getTodos() {
 //디테일 가져오기
 export async function getTodoDetail(id:string) {
     const res = await fetch(`${BACKEND_URL}${id}`,{cache: 'no-cache'})
+    return res.json();
+}
+
+export async function postTodos(data:CreateDto) {
+    const res = await fetch(`${BACKEND_URL}`,{
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(data),
+    })
     return res.json();
 }
 

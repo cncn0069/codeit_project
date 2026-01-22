@@ -13,10 +13,6 @@ export interface TodoListUpdateDto {
       isCompleted : boolean
 }
 
-export interface TodoUrlDto {
-    url:string
-}
-
 export interface TodoListProps {
     data: TodoListItemProps[];
 }

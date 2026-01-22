@@ -14,7 +14,7 @@ function TodoList({ data }:TodoListProps) {
 
   const [currentSize, setCurrentSize] = useState<'small' | 'large'>('large');
   
-    useEffect(() => {
+  useEffect(() => {
     // 375px 미만인지 확인하는 매치 쿼리
     const mediaQuery = window.matchMedia('(max-width: 374px)');
   

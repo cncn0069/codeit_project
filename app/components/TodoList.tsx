@@ -42,7 +42,7 @@ function TodoList({ data }:TodoListProps) {
             <div className='flex flex-col items-center'>
               <Image className='mb-4' src={currentSize === "large" ? '/img/empty/t_l.svg' : '/img/empty/t_s.svg'} alt='todo' height={currentSize === "large" ? 240 : 120} width={currentSize === "large" ? 240 : 120} />
               <span className='text-[#94a3b8]'>할일이 없어요</span>
-              <span className='text-[#94a3b8]'>Todo를 새롭게 추가해조세요!</span>
+              <span className='text-[#94a3b8]'>To do를 새롭게 추가해주세요!</span>
             </div>
             :
               <div className='flex flex-col gap-4'>

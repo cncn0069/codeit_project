@@ -12,7 +12,7 @@ export default async function Home() {
   const todoData = await getTodos();
 
   return (
-    <div className="flex w-full flex-col gap-10">
+    <div className="flex w-full flex-col gap-10 bg-white">
       <TodoSearchInputSection />
       <div>
         <TodoList data={todoData} />

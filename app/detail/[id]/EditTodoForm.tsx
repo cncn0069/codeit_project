@@ -78,7 +78,7 @@ function EditTodoForm({initialData,id}:any) {
     }, [todoDetail, preview, initialData]);
 
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-4 bg-white'>
       {/* 상단 */}
       <div className={`flex border-2 rounded-2xl w-full h-[64px] items-center justify-center ${todoDetail?.isCompleted ? "bg-[#ddd6fe]" : "bg-white"}`} >
         <Image 

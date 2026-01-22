@@ -42,6 +42,10 @@ function EditTodoForm({initialData,id}:any) {
     };
 
     const handleSave = async () => {
+        if(!editFlag){
+          return;
+        }
+
         let imageUrl = todoDetail.imageUrl;
 
         if (file) {
@@ -162,7 +166,7 @@ function EditTodoForm({initialData,id}:any) {
           action="edit" 
           stat={editFlag ? "active" : "default"} 
           onClick={handleSave} 
-          className="h-[168px] w-[168px] shrink-0"
+          className="h-[168px] w-[168px] shrink-0 cursor-pointer"
         />
         <MemoCRUDButton 
           action="delete" 

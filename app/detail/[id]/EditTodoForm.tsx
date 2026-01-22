@@ -172,7 +172,7 @@ function EditTodoForm({initialData,id}:any) {
           action="delete" 
           stat="default" 
           onClick={handleDelete} 
-          className="h-[168px] w-[168px] shrink-0"
+          className="h-[168px] w-[168px] shrink-0 cursor-pointer"
         />
       </div>
     </div>

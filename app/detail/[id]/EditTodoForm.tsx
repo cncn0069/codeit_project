@@ -58,13 +58,23 @@ function EditTodoForm({initialData,id}:any) {
     };
 
     useEffect(() => {
-        if (!textareaRef.current) return;
-        const lines = memo.split("\n").length;
-        const lineHeight = 24;
-        const basePadding = 120;
-        const newPaddingTop = Math.max(basePadding - (lines - 1) * lineHeight, 16);
-        textareaRef.current.style.paddingTop = `${newPaddingTop}px`;
-    }, [memo]);
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    // 패딩을 0으로 잠시 초기화해서 순수 콘텐츠 높이를 측정
+    textarea.style.paddingTop = '0px';
+    const contentHeight = textarea.scrollHeight;
+    const containerHeight = 311; // 부모 컨테이너 높이
+
+    // 컨테이너 높이에서 콘텐츠 높이를 뺀 나머지의 절반을 상단 패딩으로 설정 (수직 중앙 정렬 효과)
+    // 단, 제목(Memo) 공간과 최소 패딩(16px)을 고려함
+    let calculatedPadding = Math.floor((containerHeight - contentHeight) / 2);
+    
+    // 최소 40px(제목 공간) ~ 최대 120px 사이로 조절
+    const finalPadding = Math.max(Math.min(calculatedPadding, 120), 40);
+
+    textarea.style.paddingTop = `${finalPadding}px`;
+}, [memo]);
 
     useEffect(() => {
         if (!todoDetail || !initialData) return;
@@ -123,11 +133,14 @@ function EditTodoForm({initialData,id}:any) {
         </div>
 
         <div className='border rounded-3xl border-none h-[311px] relative overflow-hidden'>
+          {/* 배경 */}
           <Image className='object-cover' src={'/img/memo.svg'} alt='memo' fill />
+          {/* 작성영역 */}
           <div className="absolute top-4 left-4 right-4">
             <h2 className="text-[#92400e] text-lg font-bold truncate text-center">Memo</h2>
           </div>
-          <div className="absolute inset-0 flex items-center justify-center px-6 pt-7 pb-6">
+
+          <div className="absolute top-12 bottom-4 left-4 right-4 flex flex-col">
             <textarea
               ref={textareaRef}
               value={todoDetail?.memo ?? ""}
@@ -136,7 +149,7 @@ function EditTodoForm({initialData,id}:any) {
                 if (todoDetail) setTodoDetail({ ...todoDetail, memo: e.target.value });
               }}
               placeholder="메모를 입력하세요"
-              className="w-full h-full resize-none outline-none bg-transparent text-center leading-6 px-4"
+              className="w-full h-full resize-none outline-none bg-transparent text-center leading-6 px-4 overflow-y-auto scrollbar-hide"
             />
           </div>
         </div>
